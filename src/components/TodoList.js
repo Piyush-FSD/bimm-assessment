@@ -6,13 +6,11 @@ export const TodoList = ({ items, onItemCompleted, onDeleteItem }) => {
         <div>
             <ul>
                 {items.map((elem) => {
-                    console.log(elem.value, 'cal')
                     return (
                         <TodoItem
                             key={elem.id}
                             id={elem.id}
                             text={elem.text}
-                            ch={elem.value}
                             completed={elem.done}
                             onItemCompleted={onItemCompleted}
                             onDeleteItem={onDeleteItem}
