@@ -3,50 +3,57 @@ import styled from "styled-components";
 import { TodoList } from './TodoList.js';
 
 export const ToDoApp = () => {
-    const [item, setItem] = useState({ items: [], text: "" });
+    const [checkedItems, setCheckedItems] = useState([])
+    const [toDo, setToDo] = useState({ items: [], text: "" });
     const newItem = {
         id: Date.now(),
-        text: item.text,
+        text: toDo.text,
         done: false
     };
 
     const handleTextChange = (e) => {
-        setItem({ ...item, text: e.target.value })
+        setToDo({ ...toDo, text: e.target.value })
     };
 
     const handleAddItem = (e) => {
         e.preventDefault();
 
-        setItem((prevState) => ({
-            ...item, items: prevState.items.concat(newItem)
+        setToDo((prevState) => ({
+            ...toDo, items: prevState.items.concat(newItem)
         }));
     };
 
     const markItemCompleted = (itemId) => {
-        const updatedItems = item.items.map((elem) => {
-            if (itemId === item.id) {
-                item.done = !item.done
+        const updatedItems = toDo.items.map((elem) => {
+            if (itemId === toDo.id) {
+                toDo.done = !toDo.done
             }
             return elem;
         });
-        setItem({
-            ...item,
+        setToDo({
+            ...toDo,
             items: [].concat(updatedItems)
         });
     };
 
     const handleDeleteItem = (itemId) => {
-        const updatedItems = item.items.filter((item) => {
-            return item.id !== itemId
+        const updatedItems = toDo.items.filter((elem) => {
+            return elem.id !== itemId
         });
-        setItem({
-            ...item,
+        setToDo({
+            ...toDo,
             items: [].concat(updatedItems)
         });
     };
 
+    const deleteCheckedItems = () => {
+        checkedItems.forEach((elem) => {
+            handleDeleteItem(elem)
+        })
+    };
+
     return (
-        <Containerwrapper>
+        <ToDoAppWrapper>
             <Container>
                 <h1>To Do List</h1>
                 <form onSubmit={handleAddItem}>
@@ -54,30 +61,35 @@ export const ToDoApp = () => {
                         <div>
                             <Input
                                 type="text"
-                                value={item.text}
+                                value={toDo.text}
                                 onChange={handleTextChange}>
                             </Input>
                         </div>
                         <div>
-                            <AddButton disabled={!item.text}>
-                                Add #{item.items.length + 1}
+                            <AddButton disabled={!toDo.text}>
+                                Add #{toDo.items.length + 1}
                             </AddButton>
                         </div>
                     </FormContainer>
                 </form>
                 <div>
                     <TodoList
-                        items={item.items}
-                        onItemCompleted={markItemCompleted}
-                        onDeleteItem={handleDeleteItem}
+                        items={toDo.items}
+                        markItemCompleted={markItemCompleted}
+                        handleDeleteItem={handleDeleteItem}
+                        checkedItems={checkedItems}
+                        setCheckedItems={setCheckedItems}
                     />
                 </div>
             </Container>
-        </Containerwrapper>
+            <div>
+                {checkedItems.length > 0 ? <button onClick={deleteCheckedItems}>delete</button> : null}
+            </div>
+        </ToDoAppWrapper>
     )
 };
 
-const Containerwrapper = styled.div`
+const ToDoAppWrapper = styled.div`
 text-align: center;
 height: 100vh;
 `

@@ -1,36 +1,30 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styled from "styled-components";
 
-export const TodoItem = ({ id, text, completed, onItemCompleted, onDeleteItem }) => {
+export const TodoItem = ({ id, text, completed, markItemCompleted, handleDeleteItem, checkedItems, setCheckedItems }) => {
     const ref = useRef();
     const [cross, setCross] = useState(false)
-    const [checkedItem, setCheckedItem] = useState([])
 
     const crossItem = () => { setCross(!cross) };
     const crossStyling = { textDecoration: cross ? "line-through" : "none" };
 
-    const markCompleted = (e) => {
+    const handleItemChecked = (e) => {
         const isChecked = e.target.checked;
-
         if (isChecked) {
-            checkedItem.push(id)
+            setCheckedItems([...checkedItems, id])
         } else {
-            const index = checkedItem.indexOf(id)
-            checkedItem.splice(index, 1)
-        }
+            const checkedItemCopy = [...checkedItems]
+            const index = checkedItemCopy.indexOf(id)
+            checkedItemCopy.splice(index, 1)
+            setCheckedItems(checkedItemCopy)
+        };
 
-        onItemCompleted(id)
+        markItemCompleted(id);
     };
 
-    console.log(checkedItem, ' checked item')
+    console.log(checkedItems.length)
 
-    const deleteCheckedItems = () => {
-        // checkedItem.map((elem, index) => {
-        //     if ()
-        // })
-    }
-
-    const deleteItem = () => { onDeleteItem(id) };
+    const deleteItem = () => { handleDeleteItem(id) };
 
 
     // useEffect(() => {
@@ -53,7 +47,7 @@ export const TodoItem = ({ id, text, completed, onItemCompleted, onDeleteItem })
                         <div>
                             <input
                                 type="checkbox"
-                                onChange={markCompleted}
+                                onChange={handleItemChecked}
                             />
                         </div>
                         <ItemText style={crossStyling}>
@@ -63,7 +57,6 @@ export const TodoItem = ({ id, text, completed, onItemCompleted, onDeleteItem })
                     <DeleteButton type="button" onClick={deleteItem}>x</DeleteButton>
                 </ListItem>
             </div>
-            {checkedItem.length > 0 ? <button onClick={deleteCheckedItems}>delete</button> : null}
         </div>
     )
 };
