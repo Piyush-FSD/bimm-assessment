@@ -6,7 +6,7 @@ export const TodoItem = ({ id, text, completed, markItemCompleted, handleDeleteI
     const [cross, setCross] = useState(false)
 
     const crossItem = () => { setCross(!cross) };
-    const crossStyling = { textDecoration: cross ? "line-through" : "none" };
+    const crossItemStyling = { textDecoration: cross ? "line-through" : "none" };
 
     const handleItemChecked = (e) => {
         const isChecked = e.target.checked;
@@ -50,7 +50,7 @@ export const TodoItem = ({ id, text, completed, markItemCompleted, handleDeleteI
                                 onChange={handleItemChecked}
                             />
                         </div>
-                        <ItemText style={crossStyling}>
+                        <ItemText style={crossItemStyling}>
                             {text}
                         </ItemText>
                     </LabelInputContainer>

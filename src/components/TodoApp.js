@@ -42,15 +42,14 @@ export const ToDoApp = () => {
         });
         setToDo({
             ...toDo,
-            items: [].concat(updatedItems)
+            items: [].concat(updatedItems),
         });
     };
 
     const deleteCheckedItems = () => {
-        checkedItems.forEach((elem) => {
-            handleDeleteItem(elem)
-        })
-    };
+
+
+    }
 
     return (
         <ToDoAppWrapper>
