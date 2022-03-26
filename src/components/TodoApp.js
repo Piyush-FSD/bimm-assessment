@@ -46,15 +46,12 @@ export const ToDoApp = () => {
         });
     };
 
-    const deleteCheckedItems = () => {
-
-
-    }
+    const deleteCheckedItems = () => { }
 
     return (
         <ToDoAppWrapper>
             <Container>
-                <h1>To Do List</h1>
+                <Header>My Todos</Header>
                 <form onSubmit={handleAddItem}>
                     <FormContainer>
                         <div>
@@ -90,40 +87,50 @@ export const ToDoApp = () => {
 
 const ToDoAppWrapper = styled.div`
 text-align: center;
-height: 100vh;
+height: unset;
+background: #222;
 `
 
 const Container = styled.div`
-border-radius: 60px;
 width: 500px;
 height: unset;
-border: 3px solid lightblue;
 text-align: center;
-margin: auto 0;
+margin: 20px 0;
 display: inline-block;
-box-shadow: 8px 6px #bddce8;
+background: #444;
+box-shadow: 0px 0px 6px 2px #222;
 font-size: 20px;
+`;
+
+const Header = styled.h2`
+color: white;
 `
 
 const FormContainer = styled.div`
 display: flex;
 justify-content: space-evenly;
+border-bottom: 11px solid #222;
+padding-bottom: 13px;
 `
 
 const Input = styled.input`
-height: 45px;
+height: 30px;
+outline: none;
 border-radius: 15px;
 width: 280px;
-border: 3px solid lightblue;
+border: 2px solid #e1982b;
 font-size: 20px;
+box-shadow: 0px 0px 3px 3px #222;
+padding-left: 5px;
 `
 
 const AddButton = styled.button`
-color: #222;
-background: lightblue;
+color: #fff;
+background: #e1982b;
 border-radius: 20px;
-height: 45px;
+height: 35px;
 width: 100px;
-box-shadow: 1px 1px 3px 1px #8cb2ee;
-font-size: 17px;
+border: 2px solid #222;
+font-size: 15px;
+box-shadow: 1px 1px 3px 1px #222;
 `

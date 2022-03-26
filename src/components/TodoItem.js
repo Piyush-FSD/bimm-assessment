@@ -54,7 +54,7 @@ export const TodoItem = ({ id, text, completed, markItemCompleted, handleDeleteI
                             {text}
                         </ItemText>
                     </LabelInputContainer>
-                    <DeleteButton type="button" onClick={deleteItem}>x</DeleteButton>
+                    <DeleteButton type="button" onClick={deleteItem}>Delete</DeleteButton>
                 </ListItem>
             </div>
         </div>
@@ -66,16 +66,16 @@ display: flex;
 justify-content: space-between;
 padding: 2vh;
 margin: 20px 30px 20px 0;
-background: rgb(174 219 255 / 63%);
-border: 1px solid #333;
-border-radius: 20px;
 `;
 
 const DeleteButton = styled.button`
-background: lightblue; 
-border-radius: 10px;
-width: 35px;
-height: 30px;
+background: #fff; 
+border-radius: 20px;
+border: 2px solid #dd4646;
+width: unset;
+padding: 2%;
+color:#dd4646;
+height: 37px;
 `;
 const LabelInputContainer = styled.div`
 display: flex;
@@ -83,4 +83,5 @@ display: flex;
 
 const ItemText = styled.div`
 margin-left: 10px;
+color: #e1982b;
 `;

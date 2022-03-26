@@ -1,10 +1,11 @@
 import React from "react";
+import styled from "styled-components";
 import { TodoItem } from "./TodoItem.js";
 
 export const TodoList = ({ items, markItemCompleted, handleDeleteItem, checkedItems, setCheckedItems }) => {
     return (
         <div>
-            <ul>
+            <UnorderedList>
                 {items.map((elem) => {
                     return (
                         <TodoItem
@@ -19,7 +20,11 @@ export const TodoList = ({ items, markItemCompleted, handleDeleteItem, checkedIt
                         />
                     )
                 })}
-            </ul>
+            </UnorderedList>
         </div>
     )
 };
+
+const UnorderedList = styled.ul`
+margin: 0;
+`;
