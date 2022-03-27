@@ -12,6 +12,7 @@ export const TodoList = ({ items, markItemCompleted, handleDeleteItem, checkedIt
                             key={elem.id}
                             id={elem.id}
                             text={elem.text}
+                            checked={elem.checked}
                             completed={elem.done}
                             markItemCompleted={markItemCompleted}
                             handleDeleteItem={handleDeleteItem}

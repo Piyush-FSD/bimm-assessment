@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import styled from "styled-components";
 import { TodoList } from './TodoList.js';
 
@@ -23,11 +24,19 @@ export const ToDoApp = () => {
         }));
     };
 
+    useEffect(() => {
+        const itemIds = toDo.items.map((elem) => {
+            return elem.id;
+        });
+
+        localStorage.setItem("todos", JSON.stringify(itemIds))
+    }, [toDo.items]);
+
     const markItemCompleted = (itemId) => {
         const updatedItems = toDo.items.map((elem) => {
             if (itemId === toDo.id) {
                 toDo.done = !toDo.done
-            }
+            };
             return elem;
         });
         setToDo({
@@ -46,7 +55,21 @@ export const ToDoApp = () => {
         });
     };
 
-    const deleteCheckedItems = () => { }
+    const deleteCheckedItems = () => {
+        const filteredItems = toDo.items.filter((item) => !checkedItems.includes(item.id));
+
+        setToDo({
+            ...toDo,
+            items: filteredItems
+        });
+
+        if (toDo.items.length === 0) {
+            checkedItems = []
+        }
+
+    };
+    console.log(toDo.items, ' todo items')
+    console.log(checkedItems, ' checked items,')
 
     return (
         <ToDoAppWrapper>
@@ -79,7 +102,7 @@ export const ToDoApp = () => {
                 </div>
             </Container>
             <div>
-                {checkedItems.length > 0 ? <button onClick={deleteCheckedItems}>delete</button> : null}
+                {checkedItems.length > 0 ? <DeleteCheckedBtn onClick={deleteCheckedItems}>Delete Selected</DeleteCheckedBtn> : null}
             </div>
         </ToDoAppWrapper>
     )
@@ -89,7 +112,7 @@ const ToDoAppWrapper = styled.div`
 text-align: center;
 height: unset;
 background: #222;
-`
+`;
 
 const Container = styled.div`
 width: 500px;
@@ -122,7 +145,7 @@ border: 2px solid #e1982b;
 font-size: 20px;
 box-shadow: 0px 0px 3px 3px #222;
 padding-left: 5px;
-`
+`;
 
 const AddButton = styled.button`
 color: #fff;
@@ -133,4 +156,13 @@ width: 100px;
 border: 2px solid #222;
 font-size: 15px;
 box-shadow: 1px 1px 3px 1px #222;
-`
+`;
+
+const DeleteCheckedBtn = styled.button`
+background: #fff; 
+border-radius: 20px;
+border: 2px solid #dd4646;
+width: unset;
+padding: 1%;
+color:#dd4646;
+`;

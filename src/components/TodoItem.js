@@ -18,11 +18,12 @@ export const TodoItem = ({ id, text, completed, markItemCompleted, handleDeleteI
             checkedItemCopy.splice(index, 1)
             setCheckedItems(checkedItemCopy)
         };
-
         markItemCompleted(id);
     };
 
-    console.log(checkedItems.length)
+
+    // console.log(checkedItems, ' checked items')
+    // console.log(checkedItems.length, 'checked items length')
 
     const deleteItem = () => { handleDeleteItem(id) };
 
