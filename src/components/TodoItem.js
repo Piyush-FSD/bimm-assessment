@@ -1,8 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components";
 
-export const TodoItem = ({ id, text, completed, markItemCompleted, handleDeleteItem, checkedItems, setCheckedItems }) => {
-    const ref = useRef();
+export const TodoItem = ({ id, text, markItemCompleted, handleDeleteItem, checkedItems, setCheckedItems }) => {
     const [cross, setCross] = useState(false)
 
     const crossItem = () => { setCross(!cross) };
@@ -15,35 +14,20 @@ export const TodoItem = ({ id, text, completed, markItemCompleted, handleDeleteI
         } else {
             const checkedItemCopy = [...checkedItems]
             const index = checkedItemCopy.indexOf(id)
+            console.log(index, 'idxx')
             checkedItemCopy.splice(index, 1)
+
             setCheckedItems(checkedItemCopy)
         };
         markItemCompleted(id);
     };
 
-
-    // console.log(checkedItems, ' checked items')
-    // console.log(checkedItems.length, 'checked items length')
-
     const deleteItem = () => { handleDeleteItem(id) };
-
-
-    // useEffect(() => {
-    //     if (listItem) {
-
-    //     }
-
-    //     setTimeout(() => {
-
-    //     }, 500, listItem)
-    // })
 
     return (
         <div>
             <div>
-                {/* {completed ? "done" : "undone"} */}
                 <ListItem onClick={crossItem}>
-                    {/*li ref={(li) => (listItem = li)}*/}
                     <LabelInputContainer>
                         <div>
                             <input

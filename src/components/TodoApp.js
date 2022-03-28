@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import { TodoList } from './TodoList.js';
 
@@ -8,8 +7,7 @@ export const ToDoApp = () => {
     const [toDo, setToDo] = useState({ items: [], text: "" });
     const newItem = {
         id: Date.now(),
-        text: toDo.text,
-        done: false
+        text: toDo.text
     };
 
     const handleTextChange = (e) => {
@@ -63,13 +61,10 @@ export const ToDoApp = () => {
             items: filteredItems
         });
 
-        if (toDo.items.length === 0) {
-            checkedItems = []
-        }
-
+        setCheckedItems([]);
     };
-    console.log(toDo.items, ' todo items')
-    console.log(checkedItems, ' checked items,')
+    // console.log(toDo.items, 'items')
+    // console.log(checkedItems)
 
     return (
         <ToDoAppWrapper>
@@ -102,7 +97,7 @@ export const ToDoApp = () => {
                 </div>
             </Container>
             <div>
-                {checkedItems.length > 0 ? <DeleteCheckedBtn onClick={deleteCheckedItems}>Delete Selected</DeleteCheckedBtn> : null}
+                {checkedItems.length > 0 && <DeleteCheckedBtn onClick={deleteCheckedItems}>Delete Selected</DeleteCheckedBtn>}
             </div>
         </ToDoAppWrapper>
     )
