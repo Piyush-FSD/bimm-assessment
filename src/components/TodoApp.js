@@ -4,6 +4,7 @@ import { TodoList } from './TodoList.js';
 
 export const ToDoApp = () => {
     const [checkedItems, setCheckedItems] = useState([])
+    const [storageToDo, setStorageToDo] = useState()
     const [toDo, setToDo] = useState({ items: [], text: "" });
     const newItem = {
         id: Date.now(),
@@ -26,8 +27,8 @@ export const ToDoApp = () => {
         const itemIds = toDo.items.map((elem) => {
             return elem.id;
         });
-
         localStorage.setItem("todos", JSON.stringify(itemIds))
+
     }, [toDo.items]);
 
     const markItemCompleted = (itemId) => {
@@ -63,8 +64,6 @@ export const ToDoApp = () => {
 
         setCheckedItems([]);
     };
-    // console.log(toDo.items, 'items')
-    // console.log(checkedItems)
 
     return (
         <ToDoAppWrapper>

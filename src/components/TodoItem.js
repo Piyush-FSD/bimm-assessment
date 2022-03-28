@@ -14,7 +14,6 @@ export const TodoItem = ({ id, text, markItemCompleted, handleDeleteItem, checke
         } else {
             const checkedItemCopy = [...checkedItems]
             const index = checkedItemCopy.indexOf(id)
-            console.log(index, 'idxx')
             checkedItemCopy.splice(index, 1)
 
             setCheckedItems(checkedItemCopy)
